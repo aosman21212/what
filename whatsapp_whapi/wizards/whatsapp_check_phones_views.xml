@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_check_phones_form" model="ir.ui.view">
+        <field name="name">whatsapp.check.phones.form</field>
+        <field name="model">whatsapp.check.phones</field>
+        <field name="arch" type="xml">
+            <form string="Check Phone Numbers">
+                <group>
+                    <field name="channel_id"/>
+                    <field name="phones_text" placeholder="One number per line"/>
+                    <field name="result_json" widget="text" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="action_check" type="object" string="Check" class="btn-primary"/>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

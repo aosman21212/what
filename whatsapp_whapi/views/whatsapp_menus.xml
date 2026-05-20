@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_whatsapp_root" name="WhatsApp" sequence="25"/>
+
+    <menuitem id="menu_whatsapp_channels_list" name="Channels" parent="menu_whatsapp_root" action="action_whatsapp_channel" sequence="3"/>
+    <menuitem id="menu_whatsapp_chats" name="Chats" parent="menu_whatsapp_root" action="action_whatsapp_chat" sequence="10"/>
+    <menuitem id="menu_whatsapp_messages" name="Messages" parent="menu_whatsapp_root" action="action_whatsapp_message" sequence="20"/>
+    <menuitem id="menu_whatsapp_contacts" name="Contacts" parent="menu_whatsapp_root" action="action_whatsapp_contact" sequence="30"/>
+
+    <menuitem id="menu_whatsapp_groups_root" name="Groups &amp; Media" parent="menu_whatsapp_root" sequence="40"/>
+    <menuitem id="menu_whatsapp_groups" name="Groups" parent="menu_whatsapp_groups_root" action="action_whatsapp_group" sequence="10"/>
+    <menuitem id="menu_whatsapp_media" name="Media" parent="menu_whatsapp_groups_root" action="action_whatsapp_media" sequence="20"/>
+
+    <menuitem id="menu_whatsapp_business_root" name="Business" parent="menu_whatsapp_root" sequence="50"/>
+    <menuitem id="menu_whatsapp_products" name="Products" parent="menu_whatsapp_business_root" action="action_whatsapp_product" sequence="10"/>
+    <menuitem id="menu_whatsapp_collections" name="Collections" parent="menu_whatsapp_business_root" action="action_whatsapp_collection" sequence="20"/>
+    <menuitem id="menu_whatsapp_orders" name="Orders" parent="menu_whatsapp_business_root" action="action_whatsapp_order" sequence="30"/>
+    <menuitem id="menu_whatsapp_newsletters" name="Newsletters" parent="menu_whatsapp_business_root" action="action_whatsapp_newsletter" sequence="40"/>
+
+    <menuitem id="menu_whatsapp_config" name="Configuration" parent="menu_whatsapp_root" sequence="90"/>
+    <menuitem id="menu_whatsapp_channels" name="Channels" parent="menu_whatsapp_config" action="action_whatsapp_channel" sequence="10" groups="whatsapp_whapi.group_whatsapp_manager"/>
+    <menuitem id="menu_whatsapp_api_logs" name="API Logs" parent="menu_whatsapp_config" action="action_whatsapp_api_log" sequence="20" groups="whatsapp_whapi.group_whatsapp_manager"/>
+
+    <record id="action_whatsapp_send_message" model="ir.actions.act_window">
+        <field name="name">Send Message</field>
+        <field name="res_model">whatsapp.send.message</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_whatsapp_send" name="Send Message" parent="menu_whatsapp_root" action="action_whatsapp_send_message" sequence="5"/>
+
+    <record id="action_whatsapp_check_phones" model="ir.actions.act_window">
+        <field name="name">Check Phones</field>
+        <field name="res_model">whatsapp.check.phones</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_whatsapp_check_phones" name="Check Phones" parent="menu_whatsapp_config" action="action_whatsapp_check_phones" sequence="30" groups="whatsapp_whapi.group_whatsapp_manager"/>
+</odoo>

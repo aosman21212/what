@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_chat_tree" model="ir.ui.view">
+        <field name="name">whatsapp.chat.tree</field>
+        <field name="model">whatsapp.chat</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="chat_id"/>
+                <field name="channel_id"/>
+                <field name="unread_count"/>
+                <field name="is_group"/>
+                <field name="archived"/>
+                <field name="last_message_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_chat_form" model="ir.ui.view">
+        <field name="name">whatsapp.chat.form</field>
+        <field name="model">whatsapp.chat</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_inbox" type="object" string="Open in Inbox"/>
+                    <button name="action_mark_read" type="object" string="Mark Read"/>
+                    <button name="action_archive" type="object" string="Archive" invisible="archived"/>
+                    <button name="action_unarchive" type="object" string="Unarchive" invisible="not archived"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="chat_id"/>
+                        <field name="channel_id"/>
+                        <field name="unread_count"/>
+                        <field name="is_group"/>
+                        <field name="pinned"/>
+                        <field name="muted"/>
+                    </group>
+                    <field name="message_ids">
+                        <list>
+                            <field name="timestamp"/>
+                            <field name="from_me"/>
+                            <field name="body"/>
+                            <field name="message_type"/>
+                            <field name="state"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_chat" model="ir.actions.act_window">
+        <field name="name">Chats</field>
+        <field name="res_model">whatsapp.chat</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_media_tree" model="ir.ui.view">
+        <field name="name">whatsapp.media.tree</field>
+        <field name="model">whatsapp.media</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="media_id"/>
+                <field name="filename"/>
+                <field name="mimetype"/>
+                <field name="channel_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_media_form" model="ir.ui.view">
+        <field name="name">whatsapp.media.form</field>
+        <field name="model">whatsapp.media</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_upload" type="object" string="Upload to Whapi" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="channel_id"/>
+                        <field name="media_id"/>
+                        <field name="filename"/>
+                        <field name="mimetype"/>
+                        <field name="attachment_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_media" model="ir.actions.act_window">
+        <field name="name">Media</field>
+        <field name="res_model">whatsapp.media</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

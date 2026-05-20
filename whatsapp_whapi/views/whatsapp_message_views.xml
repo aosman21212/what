@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_message_tree" model="ir.ui.view">
+        <field name="name">whatsapp.message.tree</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="timestamp"/>
+                <field name="chat_id"/>
+                <field name="from_me"/>
+                <field name="message_type"/>
+                <field name="body"/>
+                <field name="state"/>
+                <field name="channel_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_message_form" model="ir.ui.view">
+        <field name="name">whatsapp.message.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_send_reply" type="object" string="Reply"/>
+                    <button name="action_mark_read" type="object" string="Mark Read"/>
+                    <button name="action_fetch_statuses" type="object" string="Fetch Read Receipts"/>
+                    <button name="action_delete" type="object" string="Delete on WhatsApp" confirm="Delete this message on WhatsApp?"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="channel_id"/>
+                        <field name="chat_id"/>
+                        <field name="message_id"/>
+                        <field name="from_me"/>
+                        <field name="from_name"/>
+                        <field name="message_type"/>
+                        <field name="state"/>
+                        <field name="timestamp"/>
+                        <field name="body"/>
+                        <field name="media_id"/>
+                        <field name="attachment_id"/>
+                    </group>
+                    <group string="Advanced" invisible="message_type not in ('poll', 'interactive', 'carousel', 'location', 'live_location')">
+                        <field name="latitude" invisible="message_type not in ('location', 'live_location')"/>
+                        <field name="longitude" invisible="message_type not in ('location', 'live_location')"/>
+                        <field name="poll_json" invisible="message_type != 'poll'"/>
+                        <field name="interactive_json" invisible="message_type != 'interactive'"/>
+                    </group>
+                    <field name="raw_payload" widget="text"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_message" model="ir.actions.act_window">
+        <field name="name">Messages</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

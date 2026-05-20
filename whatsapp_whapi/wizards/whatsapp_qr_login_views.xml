@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_qr_login_form" model="ir.ui.view">
+        <field name="name">whatsapp.qr.login.form</field>
+        <field name="model">whatsapp.qr.login</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp QR Login">
+                <group>
+                    <field name="channel_id" readonly="1"/>
+                    <field name="state_message"/>
+                </group>
+                <group>
+                    <field name="qr_image" widget="image" class="oe_avatar"/>
+                </group>
+                <footer>
+                    <button name="action_fetch_qr" type="object" string="Fetch QR" class="btn-primary"/>
+                    <button name="action_check_connected" type="object" string="Check Connected"/>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

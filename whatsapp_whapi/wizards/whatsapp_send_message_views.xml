@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_send_message_form" model="ir.ui.view">
+        <field name="name">whatsapp.send.message.form</field>
+        <field name="model">whatsapp.send.message</field>
+        <field name="arch" type="xml">
+            <form string="Send WhatsApp Message">
+                <group>
+                    <field name="channel_id"/>
+                    <field name="to" placeholder="phone or 1234567890@s.whatsapp.net"/>
+                    <field name="message_type"/>
+                    <field name="body"/>
+                    <field name="attachment_id" invisible="message_type in ('text', 'poll', 'link_preview', 'contact', 'interactive', 'carousel', 'location', 'live_location')"/>
+                    <field name="media_url" invisible="message_type in ('text', 'poll', 'contact', 'interactive', 'carousel', 'location', 'live_location')"/>
+                    <field name="latitude" invisible="message_type not in ('location', 'live_location')"/>
+                    <field name="longitude" invisible="message_type not in ('location', 'live_location')"/>
+                    <field name="poll_title" invisible="message_type != 'poll'"/>
+                    <field name="poll_options" invisible="message_type != 'poll'"/>
+                    <field name="contact_id" invisible="message_type != 'contact'"/>
+                    <field name="interactive_json" invisible="message_type != 'interactive'"/>
+                    <field name="carousel_json" invisible="message_type != 'carousel'"/>
+                    <field name="product_id"/>
+                </group>
+                <footer>
+                    <button name="action_send" type="object" string="Send" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

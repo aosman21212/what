@@ -1,0 +1,15 @@
+.o_whapi_inbox {
+    height: calc(100vh - 46px);
+    background: var(--o-view-background-color, #fff);
+
+    .o_whapi_chat_item {
+        cursor: pointer;
+        &:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+    }
+
+    .o_whapi_message {
+        max-width: 85%;
+    }
+}

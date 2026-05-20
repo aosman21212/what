@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_newsletter_tree" model="ir.ui.view">
+        <field name="name">whatsapp.newsletter.tree</field>
+        <field name="model">whatsapp.newsletter</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="newsletter_id"/>
+                <field name="subscribers_count"/>
+                <field name="channel_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_newsletter_form" model="ir.ui.view">
+        <field name="name">whatsapp.newsletter.form</field>
+        <field name="model">whatsapp.newsletter</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_subscribe" type="object" string="Subscribe"/>
+                    <button name="action_unsubscribe" type="object" string="Unsubscribe"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="newsletter_id"/>
+                        <field name="channel_id"/>
+                        <field name="description"/>
+                        <field name="subscribers_count"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_newsletter" model="ir.actions.act_window">
+        <field name="name">Newsletters</field>
+        <field name="res_model">whatsapp.newsletter</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

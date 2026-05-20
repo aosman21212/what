@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="whatsapp_whapi.WhapiInbox">
+        <div class="o_whapi_inbox d-flex flex-column h-100">
+            <div class="o_whapi_inbox_header d-flex align-items-center gap-2 p-2 border-bottom">
+                <label class="mb-0">Channel</label>
+                <select class="form-select form-select-sm w-auto" t-on-change="onChannelChange">
+                    <t t-foreach="state.channels" t-as="ch" t-key="ch.id">
+                        <option t-att-value="ch.id" t-att-selected="ch.id === state.channelId ? 'selected' : undefined">
+                            <t t-esc="ch.name"/> (<t t-esc="ch.state"/>)
+                        </option>
+                    </t>
+                </select>
+                <button class="btn btn-sm btn-secondary ms-auto" t-on-click="loadInbox">Refresh</button>
+            </div>
+            <div t-if="state.loading" class="p-4 text-muted">Loading...</div>
+            <div t-else="" class="o_whapi_inbox_body d-flex flex-grow-1 overflow-hidden">
+                <div class="o_whapi_chat_list border-end overflow-auto" style="min-width: 280px;">
+                    <t t-foreach="state.chats" t-as="chat" t-key="chat.id">
+                        <div class="o_whapi_chat_item p-2 border-bottom cursor-pointer"
+                             t-att-class="chat.chat_id === state.selectedChatId ? 'bg-light' : ''"
+                             t-on-click="() => this.selectChat(chat.chat_id)">
+                            <div class="fw-bold" t-esc="chat.name"/>
+                            <small class="text-muted" t-esc="chat.chat_id"/>
+                            <span t-if="chat.unread_count" class="badge bg-primary ms-1" t-esc="chat.unread_count"/>
+                        </div>
+                    </t>
+                    <div t-if="!state.chats.length" class="p-3 text-muted">No chats. Sync chats from channel form.</div>
+                </div>
+                <div class="o_whapi_thread d-flex flex-column flex-grow-1">
+                    <div class="o_whapi_messages flex-grow-1 overflow-auto p-3">
+                        <t t-foreach="state.messages" t-as="msg" t-key="msg.id">
+                            <div t-attf-class="o_whapi_message mb-2 {{ msg.from_me ? 'text-end' : 'text-start' }}">
+                                <div t-attf-class="d-inline-block p-2 rounded {{ msg.from_me ? 'bg-primary text-white' : 'bg-light' }}">
+                                    <small t-if="msg.from_name" class="d-block fw-bold" t-esc="msg.from_name"/>
+                                    <span t-esc="msg.body"/>
+                                    <small class="d-block opacity-75" t-esc="formatTime(msg.timestamp)"/>
+                                </div>
+                            </div>
+                        </t>
+                        <div t-if="state.selectedChatId and !state.messages.length" class="text-muted">No messages in this chat.</div>
+                        <div t-if="!state.selectedChatId" class="text-muted">Select a chat to view messages.</div>
+                    </div>
+                    <div t-if="state.selectedChatId" class="o_whapi_composer border-top p-2 d-flex gap-2">
+                        <select class="form-select form-select-sm w-auto" t-model="state.messageType">
+                            <option value="text">Text</option>
+                            <option value="image">Image</option>
+                            <option value="document">Document</option>
+                            <option value="location">Location</option>
+                            <option value="poll">Poll</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="Type a message..."
+                               t-att-value="state.composerText"
+                               t-on-input="(ev) => this.state.composerText = ev.target.value"
+                               t-on-keydown="onComposerKeydown"/>
+                        <button class="btn btn-primary" t-on-click="sendMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

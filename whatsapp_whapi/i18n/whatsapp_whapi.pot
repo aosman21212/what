@@ -1,0 +1,23 @@
+# Translation template for WhatsApp Whapi module.
+# Copyright (C) 2026
+# This file is distributed under the same license as the whatsapp_whapi package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WhatsApp Whapi 19.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-20 12:00+0000\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "WhatsApp Whapi"
+msgstr ""
+
+msgid "WhatsApp Channel (Whapi)"
+msgstr ""
+
+msgid "Send Message"
+msgstr ""
+
+msgid "QR Login"
+msgstr ""

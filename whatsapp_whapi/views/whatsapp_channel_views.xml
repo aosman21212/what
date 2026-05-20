@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_channel_tree" model="ir.ui.view">
+        <field name="name">whatsapp.channel.tree</field>
+        <field name="model">whatsapp.channel</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="state"/>
+                <field name="webhook_registered"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_channel_form" model="ir.ui.view">
+        <field name="name">whatsapp.channel.form</field>
+        <field name="model">whatsapp.channel</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_check_health" type="object" string="Check Health" class="btn-primary"/>
+                    <button name="action_open_qr_login" type="object" string="QR Login"/>
+                    <button name="action_sync_profile" type="object" string="Sync Profile"/>
+                    <button name="action_register_webhooks" type="object" string="Register Webhooks"/>
+                    <button name="action_test_webhook" type="object" string="Test Webhook"/>
+                    <button name="action_open_inbox" type="object" string="Open Inbox"/>
+                    <button name="action_sync_chats" type="object" string="Sync Chats"/>
+                    <button name="action_sync_contacts" type="object" string="Sync Contacts"/>
+                    <button name="action_sync_groups" type="object" string="Sync Groups"/>
+                    <button name="action_sync_products" type="object" string="Sync Products"/>
+                    <button name="action_sync_newsletters" type="object" string="Sync Newsletters"/>
+                    <button name="action_sync_collections" type="object" string="Sync Collections"/>
+                    <button name="action_logout" type="object" string="Logout" confirm="Logout WhatsApp session?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,qr_pending,connected,error"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_sync_chats" type="object" class="oe_stat_button" icon="fa-comments">
+                            <field name="chat_count" widget="statinfo" string="Chats"/>
+                        </button>
+                        <button name="action_sync_contacts" type="object" class="oe_stat_button" icon="fa-address-book">
+                            <field name="message_count" widget="statinfo" string="Messages"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="api_token" password="True"/>
+                            <field name="api_base_url"/>
+                            <field name="phone" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="webhook_secret" readonly="1"/>
+                            <field name="webhook_registered"/>
+                            <field name="last_health_at"/>
+                            <field name="active"/>
+                            <field name="user_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Profile" name="profile">
+                            <field name="profile_json" widget="text"/>
+                        </page>
+                        <page string="Settings" name="settings">
+                            <button name="action_sync_settings" type="object" string="Sync Settings" class="btn-secondary"/>
+                            <field name="settings_json" widget="text"/>
+                        </page>
+                        <page string="Limits" name="limits">
+                            <button name="action_get_limits" type="object" string="Fetch Limits" class="btn-secondary"/>
+                            <field name="limits_json" widget="text"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_channel" model="ir.actions.act_window">
+        <field name="name">WhatsApp Channels</field>
+        <field name="res_model">whatsapp.channel</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
